@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File upload demo</title>
+  <style>
+    img {
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <input id="input" type="file">
+  <br>
+  <img id="image">
+  <br>
+  <button id="submit-button">Submit</button>
+  <script>
+    const loadImage = (file) => {
+      const reader = new FileReader();
+      const imageElement = document.getElementById('image');
+      reader.onload = (e) => {
+        imageElement.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    };
+    
+    document.getElementById('input').addEventListener('change', (event) => {
+      loadImage(event.target.files[0]);
+    });
+
+    document.getElementById('submit-button').addEventListener('click', () => {
+      const file = document.getElementById('input').files[0];
+      alert(`submit file ${file.name}, file size is ${file.size}`);
+    });
+  </script>
+</body>
+</html>
